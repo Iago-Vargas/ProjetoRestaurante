@@ -1,0 +1,32 @@
+CREATE DATABASE restaurante;
+USE restaurante;
+
+CREATE TABLE mesa (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+  
+);
+
+CREATE TABLE bebida (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(50) NOT NULL,
+  preco DOUBLE NOT NULL,
+  nome INT NOT NULL,
+
+  );
+
+CREATE TABLE sobremesa (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(50) NOT NULL,
+  preco DOUBLE NOT NULL,
+  nome INT NOT NULL,
+
+  );
+
+CREATE TABLE comida (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(50) NOT NULL,
+  preco DOUBLE NOT NULL,
+  nome INT NOT NULL,
+
+  );
+  
