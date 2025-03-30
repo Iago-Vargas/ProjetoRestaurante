@@ -1,16 +1,16 @@
--- Cria o banco de dados
-CREATE DATABASE restaurante;
+-- Cria o banco de dados (se já não existir)
+CREATE DATABASE IF NOT EXISTS restaurante;
 USE restaurante;
 
 -- Tabela de mesas
-CREATE TABLE mesas (
+CREATE TABLE IF NOT EXISTS mesas (
     id_mesa INT PRIMARY KEY AUTO_INCREMENT,
     numero INT NOT NULL UNIQUE,
     status ENUM('livre', 'ocupada') DEFAULT 'livre'
 );
 
--- Tabela de cardápio
-CREATE TABLE cardapio (
+-- Tabela de cardápio (unificada)
+CREATE TABLE IF NOT EXISTS cardapio (
     id_item INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE cardapio (
 );
 
 -- Tabela de pedidos
-CREATE TABLE pedidos (
+CREATE TABLE IF NOT EXISTS pedidos (
     id_pedido INT PRIMARY KEY AUTO_INCREMENT,
     id_mesa INT NOT NULL,
     id_item INT NOT NULL,
@@ -30,11 +30,18 @@ CREATE TABLE pedidos (
 );
 
 -- Insere dados iniciais (exemplo)
-INSERT INTO mesas (numero, status) VALUES 
+INSERT IGNORE INTO mesas (numero, status) VALUES 
 (1, 'livre'), (2, 'livre'), (3, 'livre');
 
+-- Limpa dados antigos e insere novos
+DELETE FROM cardapio;
 INSERT INTO cardapio (nome, preco, categoria) VALUES
-('Hambúrguer Quatro Queijos', 25.90, 'comida'),
-('Hambúrguer Vegetariano', 45.50, 'comida'),
-('Refrigerante', 8.00, 'bebida'),
-('Sorvete', 12.00, 'sobremesa');
+    ('Hambúrguer Quatro Queijos', 25.90, 'comida'),
+    ('Hambúrguer Vegetariano', 45.50, 'comida'),
+    ('Pizza Margherita', 38.90, 'comida'),
+    ('Coca-Cola', 8.00, 'bebida'),
+    ('Suco Natural', 10.50, 'bebida'),
+    ('Guaraná Jesus', 7.50, 'bebida'),
+    ('Sorvete', 12.00, 'sobremesa'),
+    ('Mousse de Chocolate', 15.90, 'sobremesa'),
+    ('Pudim', 10.99, 'sobremesa');
