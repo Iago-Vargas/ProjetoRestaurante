@@ -19,14 +19,14 @@ CREATE TABLE IF NOT EXISTS ingredientes (
     estoque_minimo DECIMAL(10,3) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Tabela de cardápio (ATUALIZADA com coluna quantidade)
+-- Tabela de cardápio (ATUALIZADA com colunas de quantidade e disponibilidade)
 CREATE TABLE IF NOT EXISTS cardapio (
     id_item INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL CHECK (preco > 0),
     categoria ENUM('comida', 'bebida', 'sobremesa') NOT NULL,
-    quantidade INT NOT NULL DEFAULT 0,  -- COLUNA ADICIONADA
-    disponivel BOOLEAN DEFAULT TRUE,
+    quantidade INT NOT NULL DEFAULT 0,
+    disponivel BOOLEAN NOT NULL DEFAULT TRUE,
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -40,17 +40,17 @@ CREATE TABLE IF NOT EXISTS item_ingredientes (
     FOREIGN KEY (id_ingrediente) REFERENCES ingredientes(id_ingrediente) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Tabela de pedidos
+-- Tabela de pedidos (ATUALIZADA com status e timestamp)
 CREATE TABLE IF NOT EXISTS pedidos (
     id_pedido INT PRIMARY KEY AUTO_INCREMENT,
     id_mesa INT NOT NULL,
     id_item INT NOT NULL,
     quantidade INT DEFAULT 1 CHECK (quantidade > 0),
-    status ENUM('pendente', 'preparando', 'pronto', 'entregue') DEFAULT 'pendente',
-    observacoes TEXT,
+    status ENUM('preparando','pronto','entregue','cancelado') DEFAULT 'preparando',
     data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_mesa) REFERENCES mesas(id_mesa) ON DELETE CASCADE,
-    FOREIGN KEY (id_item) REFERENCES cardapio(id_item) ON DELETE CASCADE
+    observacoes TEXT,
+    FOREIGN KEY (id_mesa) REFERENCES mesas(id_mesa),
+    FOREIGN KEY (id_item) REFERENCES cardapio(id_item)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Índices para melhor performance
@@ -58,6 +58,58 @@ CREATE INDEX idx_pedidos_status ON pedidos(status);
 CREATE INDEX idx_pedidos_mesa ON pedidos(id_mesa);
 CREATE INDEX idx_cardapio_categoria ON cardapio(categoria);
 CREATE INDEX idx_item_ingredientes ON item_ingredientes(id_item);
+
+-- Trigger para autodesabilitar produtos com estoque zero
+DELIMITER //
+CREATE TRIGGER autodesabilita_produto
+BEFORE UPDATE ON cardapio
+FOR EACH ROW
+BEGIN
+    IF NEW.quantidade <= 0 THEN
+        SET NEW.disponivel = FALSE;
+    END IF;
+END//
+DELIMITER ;
+
+-- Trigger para atualizar status da mesa quando um pedido é feito
+DELIMITER //
+CREATE TRIGGER atualiza_status_mesa
+AFTER INSERT ON pedidos
+FOR EACH ROW
+BEGIN
+    UPDATE mesas SET status = 'ocupada' WHERE id_mesa = NEW.id_mesa;
+END//
+DELIMITER ;
+
+-- Procedure para repor estoque
+DELIMITER //
+CREATE PROCEDURE repor_estoque(IN id_ingred INT, IN qtd DECIMAL(10,3))
+BEGIN
+    START TRANSACTION;
+    UPDATE ingredientes 
+    SET quantidade = quantidade + qtd 
+    WHERE id_ingrediente = id_ingred;
+    COMMIT;
+END//
+DELIMITER ;
+
+-- Procedure para reativar produto com estoque
+DELIMITER //
+CREATE PROCEDURE reativar_produto(IN produto_id INT)
+BEGIN
+    DECLARE qtd_estoque INT;
+    
+    SELECT quantidade INTO qtd_estoque 
+    FROM cardapio WHERE id_item = produto_id;
+    
+    IF qtd_estoque > 0 THEN
+        UPDATE cardapio SET disponivel = TRUE WHERE id_item = produto_id;
+        SELECT 1 AS success, 'Produto reativado com sucesso' AS message;
+    ELSE
+        SELECT 0 AS success, 'Não é possível reativar produto com estoque zero' AS message;
+    END IF;
+END//
+DELIMITER ;
 
 -- Inserção de dados iniciais
 
@@ -80,17 +132,17 @@ INSERT INTO ingredientes (nome, quantidade, unidade_medida, estoque_minimo) VALU
 ('Pão doce', 40, 'unidades', 5),
 ('Chocolate', 25, 'kg', 5);
 
--- Cardápio (ATUALIZADO com quantidades)
-INSERT INTO cardapio (nome, preco, categoria, quantidade) VALUES
-('Hambúrguer Clássico', 25.90, 'comida', 50),
-('Hambúrguer Vegetariano', 45.50, 'comida', 30),
-('Pizza Margherita', 38.90, 'comida', 20),
-('Coca-Cola 350ml', 8.00, 'bebida', 100),
-('Suco Natural 500ml', 10.50, 'bebida', 80),
-('Guaraná Jesus 350ml', 7.50, 'bebida', 75),
-('Sorvete 2 bolas', 12.00, 'sobremesa', 60),
-('Mousse de Chocolate', 15.90, 'sobremesa', 40),
-('Pudim de Leite', 10.99, 'sobremesa', 35);
+-- Cardápio (com quantidades iniciais)
+INSERT INTO cardapio (nome, preco, categoria, quantidade, disponivel) VALUES
+('Hambúrguer Clássico', 25.90, 'comida', 50, TRUE),
+('Hambúrguer Vegetariano', 45.50, 'comida', 30, TRUE),
+('Pizza Margherita', 38.90, 'comida', 20, TRUE),
+('Coca-Cola 350ml', 8.00, 'bebida', 100, TRUE),
+('Suco Natural 500ml', 10.50, 'bebida', 80, TRUE),
+('Guaraná Jesus 350ml', 7.50, 'bebida', 75, TRUE),
+('Sorvete 2 bolas', 12.00, 'sobremesa', 60, TRUE),
+('Mousse de Chocolate', 15.90, 'sobremesa', 40, TRUE),
+('Pudim de Leite', 10.99, 'sobremesa', 35, TRUE);
 
 -- Relacionamento itens-ingredientes
 -- Hambúrguer Clássico
@@ -130,48 +182,3 @@ INSERT INTO item_ingredientes VALUES
 (9, 5, 0.25),  -- Pudim (0.25L leite)
 (9, 6, 0.15),  -- 0.15kg açúcar
 (9, 11, 1);    -- 1 pão doce
-
--- Trigger para atualizar disponibilidade do item
-DELIMITER //
-CREATE TRIGGER atualizar_disponibilidade_ingrediente
-AFTER UPDATE ON ingredientes
-FOR EACH ROW
-BEGIN
-    -- Atualiza status dos itens do cardápio quando ingredientes ficam abaixo do mínimo
-    UPDATE cardapio c
-    JOIN item_ingredientes ii ON c.id_item = ii.id_item
-    SET c.disponivel = CASE 
-        WHEN (SELECT MIN(i.quantidade >= ii.quantidade_necessaria) 
-              FROM ingredientes i
-              JOIN item_ingredientes ii2 ON i.id_ingrediente = ii2.id_ingrediente
-              WHERE ii2.id_item = c.id_item) = 1 THEN TRUE
-        ELSE FALSE
-    END
-    WHERE ii.id_ingrediente = NEW.id_ingrediente;
-END//
-DELIMITER ;
-
--- View para visualização de estoque crítico
-CREATE VIEW estoque_critico AS
-SELECT i.nome AS ingrediente, 
-       i.quantidade, 
-       i.unidade_medida, 
-       i.estoque_minimo,
-       GROUP_CONCAT(DISTINCT c.nome SEPARATOR ', ') AS itens_afetados
-FROM ingredientes i
-JOIN item_ingredientes ii ON i.id_ingrediente = ii.id_ingrediente
-JOIN cardapio c ON ii.id_item = c.id_item
-WHERE i.quantidade < i.estoque_minimo * 1.5  -- 50% acima do mínimo
-GROUP BY i.id_ingrediente;
-
--- Procedure para repor estoque
-DELIMITER //
-CREATE PROCEDURE repor_estoque(IN id_ingred INT, IN qtd DECIMAL(10,3))
-BEGIN
-    START TRANSACTION;
-    UPDATE ingredientes 
-    SET quantidade = quantidade + qtd 
-    WHERE id_ingrediente = id_ingred;
-    COMMIT;
-END//
-DELIMITER ;
