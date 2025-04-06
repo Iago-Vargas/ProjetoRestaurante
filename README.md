@@ -32,7 +32,13 @@ Este projeto tem como objetivo desenvolver um sistema para gerenciamento de pedi
 - Pagamento onde vai aparecer ao cliente os produtos que foram consumidos na mesa onde estava
 ---
 
-## 👤 Autor
+## 🧑‍💻 Diagramas
+
+### Diagrama de Caso de Uso
+![Diagrama de caso de uso](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Caso%20de%20Uso%20-%20Restaurante.png)
+
+
+## 👤 Autores
 
 - **Iago Vargas de Oliveira - github.com/Iago-Vargas**
 - **Bruno Difante - github.com/bouulzzz**
