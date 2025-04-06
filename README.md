@@ -34,9 +34,9 @@ Este projeto tem como objetivo desenvolver um sistema para gerenciamento de pedi
 
 ## 👤 Autor
 
-- **Iago Vargas de Oliveira**
-- **Bruno Difante**
-- **Gabriel Teixeira**
+- **Iago Vargas de Oliveira - github.com/Iago-Vargas**
+- **Bruno Difante - github.com/bouulzzz**
+- **Gabriel Teixeira - github.com/Teizinn**
 > Curso de Ciência da Computação – Universidade Franciscana (UFN)
 
 📧 E-mail: me@iagovargas.com & [iagovargas.com](https://iagovargas.com)
