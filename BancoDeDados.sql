@@ -135,11 +135,12 @@ INSERT INTO ingredientes (nome, quantidade, unidade_medida, estoque_minimo) VALU
 INSERT INTO cardapio (nome, preco, categoria, quantidade, disponivel) VALUES
 ('Hambúrguer Clássico', 25.90, 'comida', 50, TRUE),
 ('Hambúrguer Vegetariano', 45.50, 'comida', 30, TRUE),
-('Pizza Margherita', 38.90, 'comida', 20, TRUE),
+('Hambúrguer 4 Queijos', 38.90, 'comida', 20, TRUE),
+('Hambúrguer Programador', 38.90, 'comida', 20, TRUE),
 ('Coca-Cola 350ml', 8.00, 'bebida', 100, TRUE),
 ('Suco Natural 500ml', 10.50, 'bebida', 80, TRUE),
-('Guaraná Jesus 350ml', 7.50, 'bebida', 75, TRUE),
-('Sorvete 2 bolas', 12.00, 'sobremesa', 60, TRUE),
+('Dolly 350ml', 7.50, 'bebida', 75, TRUE),
+('Petit Gateau', 30.00, 'sobremesa', 60, TRUE),
 ('Mousse de Chocolate', 15.90, 'sobremesa', 40, TRUE),
 ('Pudim de Leite', 10.99, 'sobremesa', 35, TRUE);
 
