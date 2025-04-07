@@ -22,14 +22,15 @@ Este projeto tem como objetivo desenvolver um sistema para gerenciamento de pedi
   - Ver Pedidos (Com o tempo que o produto está aguardando)
   - Estoque (Unidades que possuem cada item que esta sendo ofertado)
   - Adicionar Produtos
+  - Desabilitar Produtos
   - Ver ganho total do dia (Aparecendo todos pagamentos realizados pelos clientes)
 > 🔹 Parte Cliente
-- Interface de Login usuario
-  - Apos efetuar o login com CPF cliente podera escolher entre a mesa (1 - 3) ou entrar em uma fila de espera 
-- Tela principal do Tablet onde conseguira escolher entre Pagamento e Cardapio
-- Cardapio onde vai apresentar todos itens que estão a venda com a foto dos itens ao lado
-  - Filtro para decidir entre Bebida, Hamburger e Sobremesas
-- Pagamento onde vai aparecer ao cliente os produtos que foram consumidos na mesa onde estava
+- Interface do Cliente
+  - O cliente poderá escolher entre a mesa (1 - 3) 
+- Tela principal do Tablet onde conseguirá escolher entre Pagamento, Cardápio e Pedir (efetuar o pedido)
+- Cardápio onde irá apresentar todos os itens que estão a venda com um ícone dos itens ao lado
+  - Filtro para decidir entre Bebida, Comida e Sobremesas
+- Pagamento, o qual irá apresentar ao cliente os produtos que foram consumidos na mesa
 ---
 
 ## 🧑‍💻 Diagramas
