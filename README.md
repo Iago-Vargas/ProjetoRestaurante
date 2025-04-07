@@ -59,13 +59,39 @@ Este diagrama de sequência descreve de forma detalhada o fluxo completo de um p
 ### Diagrama de Caso de Uso
 ![Diagrama de caso de uso](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Caso%20de%20Uso%20-%20Restaurante.png)
 
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob os termos da licença MIT.  
+Consulte o arquivo [LICENSE](LICENSE) para mais informações.
+
+---
 
 ## 👤 Autores
 
-- **Iago Vargas de Oliveira - github.com/Iago-Vargas**
-- **Bruno Difante - github.com/bouulzzz**
-- **Gabriel Teixeira - github.com/Teizinn**
-> Curso de Ciência da Computação – Universidade Franciscana (UFN)
+**Bruno Difante de Moraes da Silva**  
+Curso de Ciência da Computação – Universidade Franciscana (UFN)
 
-📧 E-mail: me@iagovargas.com & [iagovargas.com](https://iagovargas.com)
-🔗 GitHub: [@IagoVargas](https://github.com/Iago-Vargas)  
+📧 E-mail: b.difante@ufn.edu.br
+
+🔗 GitHub: [@Bruno](https://github.com/bouulzzz) 
+
+---
+
+**Gabriel Maier Teixeira**  
+Curso de Ciência da Computação – Universidade Franciscana (UFN)
+
+📧 E-mail: gabriel.teixeira@ufn.edu.br 
+
+🔗 GitHub: [@Gabriel](https://github.com/Teizinn) 
+
+
+---
+
+**Iago Vargas Oliveira**  
+Curso de Ciência da Computação – Universidade Franciscana (UFN)
+
+📧 E-mail: me@iagovargas.com  
+
+🔗 GitHub: [@Iago](https://github.com/Iago-Vargas) 
