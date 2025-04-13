@@ -35,26 +35,108 @@ Este projeto tem como objetivo desenvolver um sistema para gerenciamento de pedi
 
 ## 🧑‍💻 Diagramas
 
-### Diagrama de Classe
 
-![Diagrama de Classe](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Classe.png)
+## Diagrama de Classe - Banco
 
-O diagrama completo reúne todas as classes do sistema entidades, DAOs, conexão e interface gráfica em uma única visão integrada. Ele apresenta todas as variáveis, métodos e relacionamentos entre os módulos, permitindo compreender de forma ampla e detalhada como os componentes se comunicam entre si. Esse diagrama é ideal para ter uma visão macro do projeto e entender a arquitetura geral da aplicação.
-![Diagrama de Classe Entidades](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Classe%20Entidades.png)
 
-Este diagrama representa as entidades centrais do sistema, como Comida, Bebida, Sobremesa, Mesa e Pedido. Ele mostra a estrutura completa de cada classe, incluindo todos os atributos, construtores e métodos públicos disponíveis. Essas classes são responsáveis por representar os dados manipulados ao longo do sistema, como os itens do cardápio e os pedidos feitos pelos clientes.
-![Diagrama de Classe DAO e Conexao](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Classe%20DAO%20e%20conexao.png)
+![Diagrama de Classe Banco](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Classe/Diagrama%20de%20Classe%20Banco.png)
 
-O segundo diagrama ilustra a camada de acesso a dados, com destaque para as classes RestauranteDAO, CozinhaDAO e Conexao. Ele detalha como o sistema interage com o banco de dados, apresentando todos os métodos utilizados para realizar operações como listar, inserir, atualizar e excluir dados. A classe Conexao é responsável por estabelecer a comunicação com o banco, sendo usada pelas classes DAO.
+---
 
-![Diagrama de Classe Interface](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Classe%20Interface.png)
+## Diagrama de Classe - Cadastro Itens
 
-Este diagrama mostra as principais telas e formulários do sistema, como Tablet, Cardapio, Pagamento, CadastroProdutos, Menu, entre outras. Cada uma dessas classes representa uma parte da interface com o usuário e contém os métodos que controlam os eventos da aplicação, como cliques em botões, carregamento de dados e navegação entre telas. Ele ajuda a visualizar como a interface interage com o restante da aplicação.
 
-### Diagrama de Sequência
-![Diagrama de Sequencia](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Sequencia.png)
+![Diagrama de Classe Cadastro Itens](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Classe/Diagrama%20de%20Classe%20Cadastro%20Itens.png)
 
-Este diagrama de sequência descreve de forma detalhada o fluxo completo de um pedido realizado pelo cliente através do tablet até a finalização do pagamento. Ele ilustra as interações entre as classes Tablet, RestauranteDAO, Pedido e Pagamento, mostrando todas as chamadas de métodos, criação de objetos, manipulação de listas de pedidos e cálculo do valor total. O diagrama destaca a comunicação entre as camadas do sistema (interface, lógica e dados) e é fundamental para entender a dinâmica da aplicação durante a realização de um pedido no restaurante.
+
+---
+## Diagrama de Classe - Cliente
+
+
+![Diagrama de Classe Cliente](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Classe/Diagrama%20de%20Classe%20Cliente.png)
+
+
+---
+## Diagrama de Classe - Pagamento
+
+
+![Diagrama de Classe Pagamento](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Classe/Diagrama%20de%20Classe%20Pagamento.png)
+
+
+---
+## Diagrama de Classe - Pedido
+
+
+![Diagrama de Classe Pedido](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Classe/Diagrama%20de%20Classe%20pedido.png)
+
+
+---
+## Diagrama de Sequencia Admin - Atualizando Status Pedido
+
+
+![Diagrama de Sequencia Atualizando Status Pedido](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagramas%20de%20Sequencia/Admin/Atualizando%20Status%20Pedido.png)
+
+
+---
+## Diagrama de Sequencia Admin - Cadastro Itens
+
+
+![Diagrama de Sequencia Cadastro Itens](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagramas%20de%20Sequencia/Admin/Cadastro%20Itens.png)
+
+
+---
+## Diagrama de Sequencia Admin - Desabilitar-Habilitar Produtos
+
+
+![Diagrama de Sequencia Desabilitar-Habilitar Produtos](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagramas%20de%20Sequencia/Admin/Desabilitar-Habilitar%20Produtos.png)
+
+
+---
+## Diagrama de Sequencia Admin - Excluir Produtos
+
+
+![Diagrama de Sequencia Excluir Produtos](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagramas%20de%20Sequencia/Admin/Excluir%20Produtos.png)
+
+
+---
+## Diagrama de Sequencia Admin - Pedido Cozinha
+
+
+![Diagrama de Sequencia Pedido Cozinha](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagramas%20de%20Sequencia/Admin/Pedido%20Cozinha.png)
+
+
+---
+## Diagrama de Sequencia Cliente - Realizar pedido
+
+
+![Diagrama de Sequencia Realizar pedido](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagramas%20de%20Sequencia/Cliente/Realizar%20pedido.png)
+
+
+---
+## Diagrama de Sequencia Cliente - Visualizar cardapio
+
+
+![Diagrama de Sequencia Visualizar cardapio](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagramas%20de%20Sequencia/Cliente/Visualizar%20cardapio.png)
+
+
+---
+## Diagrama de Sequencia Cliente - Finalizando Conta 
+
+
+![Diagrama de Sequencia Finalizando Conta](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagramas%20de%20Sequencia/Cliente/Finalizando%20Conta.png)
+
+
+---
+## Diagrama de Sequencia Cliente - Tela Inicial Tablet
+
+
+![Diagrama de Sequencia Tela Inicial Tablet](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagramas%20de%20Sequencia/Cliente/Tablet.png)
+
+
+---
+
+
+
 
 
 ### Diagrama de Caso de Uso
