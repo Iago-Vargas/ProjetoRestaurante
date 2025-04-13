@@ -135,12 +135,8 @@ Este projeto tem como objetivo desenvolver um sistema para gerenciamento de pedi
 
 ---
 
-
-
-
-
-### Diagrama de Caso de Uso
-![Diagrama de caso de uso](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Caso%20de%20Uso%20-%20Restaurante.png)
+## Diagrama de Caso de Uso
+![Diagrama de caso de uso](https://github.com/Iago-Vargas/ProjetoRestaurante/blob/main/Diagramas/Diagrama%20de%20Caso%20de%20Uso/Caso%20de%20Uso.png)
 
 ---
 
